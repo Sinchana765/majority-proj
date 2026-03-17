@@ -1,17 +1,29 @@
-3rd program (jenkins)
-github : create new repo(test) copy the link 
-vs code :write simple java(myfile.java) code put it inside github repo file c:....../test
-          git bash: cd "path"
-          git clone " http:/....../test"
-          cd test
-          git add myfile.java
-          git commit -m "done"
-          git push
-jenkins:new item :test
-        choose frestyle ->ok
-        souce code manager :git 
-                            change to main
-                            choose hook(optional)
-                            build steps (execute windows... code(javac myfile.java)
-                            save
-        build now : correct marks
+got to github
+search "add two numbers"
+select fork
+then rename repo name as 'Add'-create fork-copy url 
+go to git bash
+$cd ..
+$git clone 
+$cd Add
+$git init
+$git branch f1
+$git checkout f1
+$nano file1.txt-"hello"
+$git add file1.txt
+$git commit -m"file1"
+$nano file2.txt
+$git add file2.txt
+$git commit -m"file2"
+$git checkout main
+$git  merge f1
+$nano file.txt
+$git add first.txt
+$git commit -m"first"
+$git checkout f1
+$nano first.txt
+$git add first.txt
+$git commit -m"firstfi"
+$git checkout main
+$git merge f1
+$git diff first.txt
