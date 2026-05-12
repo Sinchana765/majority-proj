@@ -1,29 +1,65 @@
-got to github
-search "add two numbers"
-select fork
-then rename repo name as 'Add'-create fork-copy url 
-go to git bash
-$cd ..
-$git clone 
-$cd Add
-$git init
-$git branch f1
-$git checkout f1
-$nano file1.txt-"hello"
-$git add file1.txt
-$git commit -m"file1"
-$nano file2.txt
-$git add file2.txt
-$git commit -m"file2"
-$git checkout main
-$git  merge f1
-$nano file.txt
-$git add first.txt
-$git commit -m"first"
-$git checkout f1
-$nano first.txt
-$git add first.txt
-$git commit -m"firstfi"
-$git checkout main
-$git merge f1
-$git diff first.txt
+go to github and create a new repository with the name "Dockerprog" ->copy it then
+$cd
+$cd student-A
+$cd Desktop
+$cd Devops
+$git clone ......url..........
+
+go to devops folder->inside that create a new file called 'Dockerfile'
+inside we want 'dockerfile' and 'sample'
+in vs code ->dockerfile                                                  same
+ FROM Python                                                            as previous 
+ WORKDIR /app                                                              one
+ COPY . /  app
+ CMD ["Python","sample.py"]
+now commit and push the changes to the repository 
+$git add
+$git commit -m "dockerfile"
+$git push
+now create a new docker image and container by running the commands below in "git bash"
+ docker build -t test2
+docker run --name cont2 test2
+docker images //list all images present in your local device ------>there copy the id of your image
+test2:latest   32fgcg23 ->copy this
+docker tag ...32fgcg23 ... thrisha-26/test2
+docker push thrisha-26/test2:latest
+now got to jenkins and click on settings->plugins
+update all installed plugins
+make sure to have these plugins installed
+->cloudBees Docker Custom Build Environment
+->Docker
+->Docker Pipelines
+->Docker Compose Buildstep
+jenskins-> new item ->with name 'Doc' ->select pipeline->ok
+then again we have pipeline then select script
+
+pipeline
+{
+agent any
+environment
+{
+dockerImage="        or 'thrisha-26/test2'
+registry='thrisha-26/test2'
+registryCredential='jenkin_docker_token'
+}
+stages{
+stage('Checkout')
+{
+steps
+{
+checkout scmGit(branches:[[name:'*/main']],extensions:[],
+userRemoteConfigs:[[url:'https://github.com/thrisha-26/dockerprog.git]]
+}
+}
+stage('Build Docker image')
+{
+steps{
+script{
+dockerImage=docker.build.registry
+}
+}
+}
+}
+}
+click on save and find the build no button on the left sidebar u can see succes in green color
+script{
